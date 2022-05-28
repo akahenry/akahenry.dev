@@ -1,4 +1,4 @@
-FROM nginx:stable-alpine
+FROM arm64v8/nginx:stable-alpine
 
 EXPOSE 80
 
