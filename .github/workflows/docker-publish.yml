@@ -3,10 +3,10 @@ name: Build and Publish to Docker Hub
 on:
   push:
     branches:
-      - "master"
+      - "gh-pages"
 
 jobs:
-  docker:
+  docker-build-publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
