@@ -24,12 +24,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Configure current date into env var
-        run: echo "CURRENT_DATE=$(date +%s)" >> $GITHUB_ENV
+      - name: Configure image tag into env var
+        run: echo "IMAGE_TAG=${GITHUB_SHA:0:7}-$(date +%s)" >> $GITHUB_ENV
 
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:${{ env.GITHUB_REF_NAME }}-${{ env.GITHUB_SHA }}-${{ env.CURRENT_DATE }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:${{ env.IMAGE_TAG }}
